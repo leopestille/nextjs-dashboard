@@ -1,7 +1,10 @@
-// This file contains type definitions for your data.
-// It describes the shape of the data, and what data type each property should accept.
-// For simplicity of teaching, we're manually defining these types.
-// However, these types are generated automatically if you're using an ORM such as Prisma.
+// Este arquivo contém definições de tipo para seus dados.
+// Ele descreve o formato dos dados e qual tipo de dados cada propriedade deve aceitar.
+// Para simplificar o ensino, estamos definindo esses tipos manualmente.
+// No entanto, esses tipos são gerados automaticamente se você estiver usando um ORM como o Prisma.
+/**
+ * Representa um usuário no sistema.
+ */
 export type User = {
   id: string;
   name: string;
@@ -9,6 +12,9 @@ export type User = {
   password: string;
 };
 
+/**
+ * Representa um cliente.
+ */
 export type Customer = {
   id: string;
   name: string;
@@ -16,21 +22,30 @@ export type Customer = {
   image_url: string;
 };
 
+/**
+ * Representa uma fatura.
+ */
 export type Invoice = {
   id: string;
   customer_id: string;
   amount: number;
   date: string;
-  // In TypeScript, this is called a string union type.
-  // It means that the "status" property can only be one of the two strings: 'pending' or 'paid'.
+  // No TypeScript, isso é chamado de tipo de união de string.
+  // Isso significa que a propriedade "status" só pode ser uma das duas strings: 'pendente' ou 'pago'.
   status: 'pending' | 'paid';
 };
 
+/**
+ * Representa os dados de receita de um mês específico.
+ */
 export type Revenue = {
   month: string;
   revenue: number;
 };
 
+/**
+ * Representa os detalhes da fatura mais recente.
+ */
 export type LatestInvoice = {
   id: string;
   name: string;
@@ -39,22 +54,19 @@ export type LatestInvoice = {
   amount: string;
 };
 
-// The database returns a number for amount, but we later format it to a string with the formatCurrency function
+// O banco de dados retorna um número para o valor, mas depois o formatamos para uma string com a função formatCurrency
+
+/**
+ * Representa a versão bruta do tipo LatestInvoice, com o campo 'amount'
+ * sendo um número em vez de seu tipo original.
+ */
 export type LatestInvoiceRaw = Omit<LatestInvoice, 'amount'> & {
   amount: number;
 };
 
-export type InvoicesTable = {
-  id: string;
-  customer_id: string;
-  name: string;
-  email: string;
-  image_url: string;
-  date: string;
-  amount: number;
-  status: 'pending' | 'paid';
-};
-
+/**
+ * Representa a estrutura de uma fatura na tabela de faturas.
+ */
 export type CustomersTableType = {
   id: string;
   name: string;
@@ -65,6 +77,9 @@ export type CustomersTableType = {
   total_paid: number;
 };
 
+/**
+ * Representa uma entrada de tabela de clientes formatada.
+ */
 export type FormattedCustomersTable = {
   id: string;
   name: string;
@@ -75,11 +90,17 @@ export type FormattedCustomersTable = {
   total_paid: string;
 };
 
+/**
+ * Representa um campo de cliente com um ID e um nome.
+ */
 export type CustomerField = {
   id: string;
   name: string;
 };
 
+/**
+ * Representa os dados do formulário para uma fatura. 
+ */
 export type InvoiceForm = {
   id: string;
   customer_id: string;
